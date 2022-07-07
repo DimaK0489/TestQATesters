@@ -7,8 +7,21 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
+@media screen and (max-width: 600px) {
+  .container tr{
+    display: block;
+    margin-bottom: 30px;
+  }
+  .container td{
+    display: block;
+    text-align: center;
+  }
+}
 .header {
   background-color: $color-header;
   height: 70px;
