@@ -9,6 +9,9 @@ interface Props {
   paginate: (number: number) => void,
   nextPage: () => void,
   prevPage: () => void,
+  onChangePage?: React.ChangeEventHandler<
+    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+  >;
 }
 
 export const limitOptions = [
@@ -26,11 +29,12 @@ export const limitOptions = [
   },
 ];
 
-export const Pagination = ({perPage, total, paginate, prevPage, nextPage, page}: Props) => {
+export const Pagination = ({perPage, total, paginate, prevPage, nextPage, page, onChangePage}: Props) => {
   const pageNumber = [];
   for (let i = 1; i <= Math.ceil(total / perPage); i++) {
     pageNumber.push(i)
   }
+
   return (
     <div className={style.container}>
       <button disabled={page <= 1} className={style.button} onClick={prevPage}>Prev</button>
@@ -39,8 +43,8 @@ export const Pagination = ({perPage, total, paginate, prevPage, nextPage, page}:
           {number}
         </button>
       ))}
-      <button disabled={page >= perPage} className={style.button} onClick={nextPage}>Next</button>
-      <Form.Select>
+      <button disabled={page >= total} className={style.button} onClick={nextPage}>Next</button>
+      <Form.Select onChange={onChangePage}>
         {limitOptions?.map((option) => (
           <option key={option.name} value={option.value ?? option.name}>
             {option.name}

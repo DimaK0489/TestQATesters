@@ -12,7 +12,7 @@ export const Actions: React.FC = () => {
 
   const [items, setItems] = useState<ActionsType[]>([]);
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(10);
+  const [perPage, setPerPage] = useState(5);
   const paginate = (page: number) => setPage(page);
 
   useEffect(() => {
@@ -24,6 +24,7 @@ export const Actions: React.FC = () => {
     };
     fetchData();
   }, []);
+  useEffect(() => setPerPage(perPage), [perPage])
 
   const getStatus = (status: StatusTypes) => (
     <div className={style.status} style={{backgroundColor: StatusColors[status]}}>
@@ -71,11 +72,19 @@ export const Actions: React.FC = () => {
     );
   };
 
+  const onPaginationLimitChange = (value: number) => {
+    if (value < perPage) {
+      setPerPage(value * (page - 1));
+    }
+    setPerPage(value);
+  };
+
   return (
     <div className={style.container}>
       {renderTable()}
       <Pagination page={page} prevPage={prevPage} nextPage={nextPage}
-                  perPage={perPage} total={items.length} paginate={paginate}/>
+                  perPage={perPage} total={items.length} paginate={paginate} onChangePage={(event) =>
+        onPaginationLimitChange(Number(event.target.value))}/>
     </div>
   );
 }
