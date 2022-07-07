@@ -1,0 +1,22 @@
+@import "../../variables.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  .button {
+    color: $color-light-red;
+    margin: 5px 10px;
+    cursor: pointer;
+  }
+
+  .total {
+    color: $color-total-button;
+    cursor: pointer;
+  }
+
+  .active {
+    background-color: $color-active-button;
+  }
+}
