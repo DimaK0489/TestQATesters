@@ -43,7 +43,7 @@ export const Pagination = ({perPage, total, paginate, prevPage, nextPage, page, 
           {number}
         </button>
       ))}
-      <button disabled={page >= perPage} className={style.button} onClick={nextPage}>Next</button>
+      <button disabled={page >= total} className={style.button} onClick={nextPage}>Next</button>
       <Form.Select onChange={onChangePage}>
         {limitOptions?.map((option) => (
           <option key={option.name} value={option.value ?? option.name}>
